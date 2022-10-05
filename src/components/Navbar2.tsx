@@ -1,11 +1,11 @@
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useOutSideClick from "../hooks/useOutSideClick";
 
 const navData = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Product", path: "/product" },
+  { name: "Posts", path: "/posts" },
   { name: "Dashboard", path: "/dashboard" },
   { name: "Add Product", path: "/dashboard/add-product" },
   { name: "Manage Product", path: "/dashboard/manage-product" },
@@ -36,13 +36,18 @@ const Navbar2 = () => {
             Routing Test
           </Link>
           {navData.map(({ name, path }) => (
-            <Link
-              className="mx-3 text-base block my-3 md:my-0"
+            <NavLink
+              className={({ isActive, isPending }) =>
+                `mx-3 text-base block my-3 md:my-0${
+                  isActive ? " text-fuchsia-900" : ""
+                }`
+              }
+              end
               to={path}
               key={path}
             >
               {name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </nav>

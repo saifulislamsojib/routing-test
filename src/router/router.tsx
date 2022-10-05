@@ -8,7 +8,8 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import ManageProduct from "../pages/Dashboard/ManageProduct";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
-import Product from "../pages/Product/Product";
+import Posts from "../pages/Product/Posts";
+import SinglePost from "../pages/Product/SinglePost";
 
 const router = createBrowserRouter([
   {
@@ -32,9 +33,18 @@ const router = createBrowserRouter([
             element: <About />,
           },
           {
-            path: "product",
-            element: <Product />,
+            path: "posts",
+            element: <Posts />,
             loader: () => fetch("https://jsonplaceholder.typicode.com/posts"),
+            errorElement: <NotFound />,
+          },
+          {
+            path: "posts/:postId",
+            element: <SinglePost />,
+            loader: ({ params }) =>
+              fetch(
+                `https://jsonplaceholder.typicode.com/posts/${params.postId}`
+              ),
             errorElement: <NotFound />,
           },
           {

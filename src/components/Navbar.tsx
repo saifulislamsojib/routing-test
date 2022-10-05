@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const navData = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Product", path: "/product" },
-  { name: "Orders", path: "/orders" },
-  { name: "Checkout", path: "/checkout" },
+  { name: "Posts", path: "/posts" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Add Product", path: "/dashboard/add-product" },
+  { name: "Manage Product", path: "/dashboard/manage-product" },
 ];
 
 const Navbar = () => {
@@ -31,13 +32,18 @@ const Navbar = () => {
           } top-[49px] transition-all absolute md:static bg-blue-500`}
         >
           {navData.map(({ name, path }) => (
-            <Link
-              className="mx-2 text-base block my-2 md:my-0"
+            <NavLink
+              className={({ isActive }) =>
+                `mx-2 text-base block my-2 md:my-0${
+                  isActive ? " text-fuchsia-900" : ""
+                }`
+              }
               to={path}
               key={path}
+              end
             >
               {name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </nav>
