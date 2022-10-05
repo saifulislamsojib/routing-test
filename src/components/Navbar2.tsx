@@ -1,17 +1,18 @@
-import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import useOutSideClick from "../hooks/useOutSideClick";
 
 const navData = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Product", path: "/product" },
-  { name: "Orders", path: "/orders" },
-  { name: "Checkout", path: "/checkout" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Add Product", path: "/dashboard/add-product" },
+  { name: "Manage Product", path: "/dashboard/manage-product" },
 ];
 
 const Navbar2 = () => {
-  const [open, setOpen] = useState(false);
+  const { isActive, toggleActive, menuRef } = useOutSideClick();
 
   return (
     <header className="mb-2 sticky top-0 bg-blue-500 text-white">
@@ -19,20 +20,24 @@ const Navbar2 = () => {
         <Link className="text-2xl font-semibold" to="/">
           Routing Test
         </Link>
-        <div
-          className="md:hidden text-xl"
-          onClick={() => setOpen((pre) => !pre)}
-        >
-          {open ? <AiOutlineClose /> : <AiOutlineMenu />}
+        <div className="md:hidden text-2xl" onClick={toggleActive}>
+          {isActive ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
         <div
-          className={`md:flex items-center w-3/5 min-h-[100vh] md:min-h-min md:w-min ${
-            open ? "left-0" : "left-[-100%]"
+          className={`md:flex items-center w-[250px] min-h-[100vh] md:min-h-min md:w-[unset] ${
+            isActive ? "left-0" : "left-[-100%]"
           } top-0 transition-all absolute md:static bg-blue-500`}
+          ref={menuRef}
         >
+          <Link
+            className="text-2xl font-semibold m-2 mb-4 block md:hidden"
+            to="/"
+          >
+            Routing Test
+          </Link>
           {navData.map(({ name, path }) => (
             <Link
-              className="mx-2 text-base block my-2 md:my-0"
+              className="mx-3 text-base block my-3 md:my-0"
               to={path}
               key={path}
             >
