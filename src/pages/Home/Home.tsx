@@ -1,5 +1,5 @@
+import TextModifier, { TextModifierProps } from "textmodifier";
 import { useStore } from "../../components/Layout";
-import TextSplit from "../../components/TextSplit";
 
 const Home = () => {
   const {
@@ -10,6 +10,19 @@ const Home = () => {
   const text = "Hello dfrsh fsrgdh adgfsrg rwgyj ret fdgj H dfs ";
   const text2 =
     "Hello dfrsh fsrgdh \n adgfsrg rwgyj \n ret fdgj H dfs frt5h hyj7i \n yjuk8 jju7i \n yuko8, utko8";
+
+  const renderNonHighlight: TextModifierProps["renderNonHighlight"] = (
+    text,
+    isLast
+  ) => {
+    return (
+      <span className="text-blue-500">
+        {text}
+        {isLast ? "." : ""}
+      </span>
+    );
+  };
+
   return (
     <div>
       <h1
@@ -21,10 +34,10 @@ const Home = () => {
       >
         This is Home page{count}
       </h1>
-      <TextSplit
+      <TextModifier
         text={text}
         as="p"
-        highlight={"Hello"}
+        highlight={"hello"}
         highlightClassName="text-5xl"
         caseOff
         renderNonHighlight={(text, isLast) => {
@@ -46,10 +59,11 @@ const Home = () => {
           );
         }}
       />
-      <TextSplit
+      <TextModifier
         text={text2}
         as="p"
         className="bg-blue-400"
+        renderSeparator={() => <hr />}
         renderText={(text, isLast) => {
           return (
             <span className="text-xl">

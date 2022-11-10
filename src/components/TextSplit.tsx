@@ -76,7 +76,7 @@ const Render = ({ splittedText = "", index }: IRender): JSX.Element => {
   if (newHighlight.length && isHave) {
     if (typeof newHighlight === "string" && lowerT === newHighlight) {
       return (
-        <>{renderHighlight?.(newT, index === lastIndex, highlightClassName)}</>
+        <>{renderHighlight(newT, index === lastIndex, highlightClassName)}</>
       );
     }
     const highlightInArr = newT.split(highlightSeparator);
